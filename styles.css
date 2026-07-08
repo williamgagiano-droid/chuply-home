@@ -46,6 +46,14 @@ a { text-decoration: none; color: inherit; }
   font-weight: 800;
   font-size: 20px;
   letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  border-radius: 6px;
+  display: block;
 }
 
 .header-nav a {
