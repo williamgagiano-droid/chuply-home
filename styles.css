@@ -154,6 +154,18 @@ a { text-decoration: none; color: inherit; }
   justify-content: center;
   font-size: 22px;
   margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.product-icon-img {
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.product-icon-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .product-card h3 {
