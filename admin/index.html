@@ -434,14 +434,31 @@
     layers.push(l); select(l.id); render();
   }
 
-  function addImageLayer(dataUrl, natW, natH){
+  function fitImageLayerToCanvas(l, mode){
     const f = fmt();
-    const scale = Math.min(f.w*0.8/natW, f.h*0.8/natH, 1);
+    const natW = l.natW, natH = l.natH;
+    if(!natW || !natH) return;
+    let scale;
+    if(mode==='cover'){
+      scale = Math.max(f.w/natW, f.h/natH);
+    } else if(mode==='contain'){
+      scale = Math.min(f.w/natW, f.h/natH);
+    } else { // 'containCapped' — used as the default for small brand logos, never upscales
+      scale = Math.min(f.w*0.8/natW, f.h*0.8/natH, 1);
+    }
     const w = natW*scale, h = natH*scale;
+    l.w = w; l.h = h;
+    l.x = (f.w-w)/2; l.y = (f.h-h)/2;
+    l.fitMode = mode;
+  }
+
+  function addImageLayer(dataUrl, natW, natH, opts){
+    opts = opts || {};
     const l = {
       id: uid(), type:'image', name:'Image',
-      src:dataUrl, x:(f.w-w)/2, y:(f.h-h)/2, w, h, radius:0
+      src:dataUrl, natW, natH, x:0, y:0, w:0, h:0, radius:0
     };
+    fitImageLayerToCanvas(l, opts.fit || 'containCapped');
     layers.push(l); select(l.id); render();
   }
 
@@ -523,6 +540,10 @@
       html += `<div class="row2"><div class="field"><label>Width</label><input type="text" id="p_w" value="${Math.round(l.w)}"></div>
         <div class="field"><label>Height</label><input type="text" id="p_h" value="${Math.round(l.h)}"></div></div>`;
     } else if(l.type==='image'){
+      html += `<div class="field"><label>Fit to canvas</label><div class="align-row">
+        <button id="p_fitCover" class="${l.fitMode==='cover'?'active':''}">Fill</button>
+        <button id="p_fitContain" class="${l.fitMode==='contain'?'active':''}">Fit</button>
+      </div></div>`;
       html += `<div class="field"><label>Corner radius</label><input type="range" id="p_radius" min="0" max="200" value="${l.radius}"></div>`;
       html += `<div class="row2"><div class="field"><label>Width</label><input type="text" id="p_w" value="${Math.round(l.w)}"></div>
         <div class="field"><label>Height</label><input type="text" id="p_h" value="${Math.round(l.h)}"></div></div>`;
@@ -577,9 +598,14 @@
     const op = document.getElementById('p_opacity');
     if(op) op.addEventListener('input', e=>{ l.opacity=parseInt(e.target.value)/100; render(); });
     const w = document.getElementById('p_w');
-    if(w) w.addEventListener('change', e=>{ l.w=Math.max(4,parseInt(e.target.value)||l.w); render(); });
+    if(w) w.addEventListener('change', e=>{ l.w=Math.max(4,parseInt(e.target.value)||l.w); if(l.type==='image') l.fitMode=null; render(); });
     const h = document.getElementById('p_h');
-    if(h) h.addEventListener('change', e=>{ l.h=Math.max(4,parseInt(e.target.value)||l.h); render(); });
+    if(h) h.addEventListener('change', e=>{ l.h=Math.max(4,parseInt(e.target.value)||l.h); if(l.type==='image') l.fitMode=null; render(); });
+
+    const fitCover = document.getElementById('p_fitCover');
+    if(fitCover) fitCover.addEventListener('click', ()=>{ fitImageLayerToCanvas(l,'cover'); renderProps(); render(); });
+    const fitContain = document.getElementById('p_fitContain');
+    if(fitContain) fitContain.addEventListener('click', ()=>{ fitImageLayerToCanvas(l,'contain'); renderProps(); render(); });
 
     const rep = document.getElementById('p_replace');
     if(rep) rep.addEventListener('click', ()=>{ fileInput.dataset.mode='replace'; fileInput.dataset.target=l.id; fileInput.click(); });
@@ -832,10 +858,13 @@
       testImg.onload = ()=>{
         if(fileInput.dataset.mode==='replace'){
           const l = layers.find(x=>x.id===fileInput.dataset.target);
-          if(l){ l.src = dataUrl; imageCache[dataUrl] = testImg; render(); }
+          if(l){
+            l.src = dataUrl; l.natW = testImg.naturalWidth; l.natH = testImg.naturalHeight;
+            imageCache[dataUrl] = testImg; render();
+          }
         } else {
           imageCache[dataUrl] = testImg;
-          addImageLayer(dataUrl, testImg.naturalWidth, testImg.naturalHeight);
+          addImageLayer(dataUrl, testImg.naturalWidth, testImg.naturalHeight, {fit:'cover'});
         }
       };
       testImg.src = dataUrl;
@@ -854,7 +883,11 @@
       currentFormat = key;
       [...fmtTabs.children].forEach(c=>c.classList.remove('active'));
       b.classList.add('active');
-      setCanvasSize(); render();
+      setCanvasSize();
+      layers.forEach(l=>{
+        if(l.type==='image' && (l.fitMode==='cover' || l.fitMode==='contain')) fitImageLayerToCanvas(l, l.fitMode);
+      });
+      renderProps(); render();
     });
     fmtTabs.appendChild(b);
   });
