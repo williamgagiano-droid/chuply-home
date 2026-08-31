@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switchboard — Chuply</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #fffefb;
+    --surface-2: #ece9de;
+    --ink: #1c1a16;
+    --ink-2: #59564c;
+    --line: #e1ddcf;
+    --accent: #c65a1f;
+    --live-bg: #e3f0e6;
+    --live-fg: #2c6b44;
+    --live-dot: #3f9c63;
+    --shadow: 0 1px 2px rgba(28, 26, 22, 0.05), 0 10px 28px -14px rgba(28, 26, 22, 0.22);
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17150f;
+      --surface: #201d16;
+      --surface-2: #29251a;
+      --ink: #f3f0e6;
+      --ink-2: #b6af9d;
+      --line: #37331f;
+      --accent: #e8863f;
+      --live-bg: #1d3225;
+      --live-fg: #7fd39f;
+      --live-dot: #4fbf7c;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image: radial-gradient(var(--line) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: "Hanken Grotesk", -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 20px 64px;
+  }
+
+  header { margin-bottom: 36px; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+    margin: 0 0 12px;
+  }
+
+  .sub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: var(--ink-2);
+    font-size: 15.5px;
+    margin: 0;
+  }
+
+  .sub .dots { display: inline-flex; gap: 5px; }
+
+  .sub .dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--live-dot);
+  }
+
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card:hover, .card:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+
+  .card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: fit-content;
+    padding: 4px 9px 4px 8px;
+    border-radius: 100px;
+    background: var(--live-bg);
+    color: var(--live-fg);
+  }
+
+  .status i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .card-body h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .card-body p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .slug {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    opacity: 0.75;
+  }
+
+  .action {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .arrow { transition: transform 0.15s ease; }
+
+  .card:hover .arrow, .card:focus-visible .arrow {
+    transform: translate(2px, -2px);
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .arrow { transition: none; }
+    .card:hover, .card:focus-visible { transform: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Private &middot; ops panel</p>
+    <h1>Switchboard</h1>
+    <p class="sub">
+      <span class="dots"><span></span><span></span><span></span></span>
+      Every property, one tap to its admin &mdash; all linked
+    </p>
+  </header>
+
+  <ul class="grid">
+    <li>
+      <a class="card" href="https://shopfront.chuply.com/admin" target="_blank" rel="noopener">
+        <span class="status"><i></i>Live</span>
+        <div class="card-body">
+          <h2>ShopFront SA</h2>
+          <p>Merchant admin panel</p>
+        </div>
+        <span class="slug">shopfront</span>
+        <span class="action">Open admin <span class="arrow">&#8599;</span></span>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="https://admin.chuply.com/admin" target="_blank" rel="noopener">
+        <span class="status"><i></i>Live</span>
+        <div class="card-body">
+          <h2>Chuply Ops</h2>
+          <p>Platform ops admin</p>
+        </div>
+        <span class="slug">chuply-ops</span>
+        <span class="action">Open admin <span class="arrow">&#8599;</span></span>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="https://hse360.chuply.com/admin/login" target="_blank" rel="noopener">
+        <span class="status"><i></i>Live</span>
+        <div class="card-body">
+          <h2>HSE360</h2>
+          <p>Admin panel</p>
+        </div>
+        <span class="slug">hse360</span>
+        <span class="action">Open admin <span class="arrow">&#8599;</span></span>
+      </a>
+    </li>
+  </ul>
+
+  <footer>
+    Links change? Tell Claude the new admin URL and this page gets updated.
+  </footer>
+</main>
+</body>
+</html>
