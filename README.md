@@ -5,7 +5,6 @@ Landing page for **chuply.com** — the main brand page linking to all Chuply pr
 - [ShopFront SA](https://shopfront.chuply.com) — online store builder
 - [Chuply Ops](https://ops.chuply.com) — field service management
 - [Chuply Schools](https://schools.chuply.com) — cashless tuckshop payments
-- [Chuply Rewards](https://rewards.chuply.com) — digital loyalty cards
 - [Chuply Summaries](https://summaries.chuply.com) — academic summaries
 
 Plain static HTML/CSS, no build step.
