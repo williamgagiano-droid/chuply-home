@@ -1,4 +1,62 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+# AI assistants and AI search crawlers are welcome
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /switchboard/
 
 Sitemap: https://www.chuply.com/sitemap.xml
