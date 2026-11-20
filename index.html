@@ -47,30 +47,242 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Chuply",
-  "url": "https://www.chuply.com/",
-  "logo": "https://www.chuply.com/assets/chuply-logo.png",
-  "description": "Chuply builds simple, ZAR-priced software for South African businesses and schools.",
-  "email": "support@chuply.com",
-  "sameAs": ["https://www.facebook.com/Chuply"],
-  "areaServed": "ZA",
-  "brand": [
-    { "@type": "SoftwareApplication", "name": "ShopFront SA", "url": "https://shopfront.chuply.com", "applicationCategory": "BusinessApplication", "description": "Online store builder with PayFast, Instant EFT, and local couriers built in." },
-    { "@type": "SoftwareApplication", "name": "Chuply Ops", "url": "https://ops.chuply.com", "applicationCategory": "BusinessApplication", "description": "Field service management: quotes, work cards, invoices, and payments." },
-    { "@type": "SoftwareApplication", "name": "Chuply Schools", "url": "https://schools.chuply.com", "applicationCategory": "BusinessApplication", "description": "Cashless tuckshop payments for South African schools." },
-    { "@type": "SoftwareApplication", "name": "Chuply Echo", "url": "https://echo.chuply.com", "applicationCategory": "MultimediaApplication", "description": "Personalised songs, voiceovers and radio ads, made in minutes." }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.chuply.com/#org",
+      "name": "Chuply",
+      "url": "https://www.chuply.com/",
+      "logo": "https://www.chuply.com/assets/chuply-logo.png",
+      "description": "Chuply is a South African software company that builds simple, Rand-priced software for South African businesses and schools.",
+      "email": "support@chuply.com",
+      "sameAs": [
+        "https://www.facebook.com/Chuply"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ZA"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@chuply.com",
+        "areaServed": "ZA",
+        "availableLanguage": [
+          "en",
+          "af"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.chuply.com/#website",
+      "name": "Chuply",
+      "url": "https://www.chuply.com/",
+      "publisher": {
+        "@id": "https://www.chuply.com/#org"
+      },
+      "inLanguage": "en-ZA"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.chuply.com/#products",
+      "name": "Chuply products",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://shopfront.chuply.com/#app"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": "https://ops.chuply.com/#app"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@id": "https://schools.chuply.com/#app"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@id": "https://echo.chuply.com/#app"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://shopfront.chuply.com/#app",
+      "name": "ShopFront SA",
+      "url": "https://shopfront.chuply.com",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web browser",
+      "description": "Online store builder for South African businesses with PayFast, Instant EFT and local couriers built in. No transaction fee stacked on top, priced in Rands from R0/month.",
+      "image": "https://www.chuply.com/assets/shopfront.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "publisher": {
+        "@id": "https://www.chuply.com/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "ZAR",
+        "description": "Free plan available; paid plans priced in Rands"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ops.chuply.com/#app",
+      "name": "Chuply Ops",
+      "url": "https://ops.chuply.com",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web browser",
+      "description": "Field service management for South African contractors and trades: quotes, work cards, invoices and payments in one pipeline. ZAR and VAT ready.",
+      "image": "https://www.chuply.com/assets/ops.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "publisher": {
+        "@id": "https://www.chuply.com/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "ZAR",
+        "description": "Priced in Rands"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://schools.chuply.com/#app",
+      "name": "Chuply Schools",
+      "url": "https://schools.chuply.com",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web browser",
+      "description": "Cashless tuckshop payments for South African schools. Students tap a QR card, parents top up online via PayFast, and school admins get full visibility. Free for up to 30 students.",
+      "image": "https://www.chuply.com/assets/schools.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "publisher": {
+        "@id": "https://www.chuply.com/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "ZAR",
+        "description": "Free for up to 30 students"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://echo.chuply.com/#app",
+      "name": "Chuply Echo",
+      "url": "https://echo.chuply.com",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web browser",
+      "description": "Personalised songs with a person's name in them, made in minutes and shared with a link, plus natural voiceovers and radio ads for businesses with South African English and Afrikaans voices.",
+      "image": "https://www.chuply.com/assets/echo.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "publisher": {
+        "@id": "https://www.chuply.com/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "ZAR",
+        "description": "Priced in Rands"
+      },
+      "inLanguage": [
+        "en-ZA",
+        "af"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.chuply.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Chuply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chuply is a South African software company. It builds simple, Rand-priced tools for South African businesses and schools: ShopFront SA (online stores), Chuply Ops (field service management), Chuply Schools (cashless tuckshops) and Chuply Echo (personalised songs and voiceovers)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good online store builder for South Africa that takes PayFast?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ShopFront SA by Chuply is an online store builder made for South African businesses. PayFast, Instant EFT and local couriers are built in, there is no extra transaction fee stacked on top, and pricing is in Rands from R0/month."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there job card and invoicing software for South African contractors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chuply Ops is field service management software for South African contractors and trades. It handles quotes, work cards, invoices and payments in one pipeline and is ZAR and VAT ready."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can a South African school run a cashless tuckshop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chuply Schools lets students pay at the tuckshop with a QR card while parents top up online via PayFast. School admins see every transaction. It is free for up to 30 students."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I get a personalised song with someone's name in it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chuply Echo makes a one-of-a-kind song with a person's name in it in minutes, shared with a link. It also makes natural voiceovers and radio ads for businesses, with South African English and Afrikaans voices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are Chuply products billed in Rands?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every Chuply product is priced in South African Rands (ZAR), with no USD billing or conversion surprises. Products connect to PayFast, Ozow, Yoco, SnapScan and EFT."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to install an app to use Chuply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Every Chuply product works in the web browser, shares over WhatsApp, and sets up in minutes with no downloads."
+          }
+        }
+      ]
+    }
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Chuply",
-  "url": "https://www.chuply.com/"
-}
-</script>
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary">
 </head>
 <body>
 
@@ -80,6 +292,7 @@
     <nav class="header-nav">
       <a href="#products">Products</a>
       <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
       <a href="mailto:support@chuply.com">Contact</a>
     </nav>
   </div>
@@ -154,6 +367,42 @@
         <h4>No app required</h4>
         <p>Everything works in the browser, shares over WhatsApp, and sets up in minutes — no downloads, no training.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <h2 class="section-title">Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What is Chuply?</summary>
+        <p>Chuply is a South African software company. It builds simple, Rand-priced tools for South African businesses and schools: ShopFront SA (online stores), Chuply Ops (field service management), Chuply Schools (cashless tuckshops) and Chuply Echo (personalised songs and voiceovers).</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is a good online store builder for South Africa that takes PayFast?</summary>
+        <p>ShopFront SA by Chuply is an online store builder made for South African businesses. PayFast, Instant EFT and local couriers are built in, there is no extra transaction fee stacked on top, and pricing is in Rands from R0/month.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is there job card and invoicing software for South African contractors?</summary>
+        <p>Chuply Ops is field service management software for South African contractors and trades. It handles quotes, work cards, invoices and payments in one pipeline and is ZAR and VAT ready.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How can a South African school run a cashless tuckshop?</summary>
+        <p>Chuply Schools lets students pay at the tuckshop with a QR card while parents top up online via PayFast. School admins see every transaction. It is free for up to 30 students.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Where can I get a personalised song with someone&#x27;s name in it?</summary>
+        <p>Chuply Echo makes a one-of-a-kind song with a person&#x27;s name in it in minutes, shared with a link. It also makes natural voiceovers and radio ads for businesses, with South African English and Afrikaans voices.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are Chuply products billed in Rands?</summary>
+        <p>Yes. Every Chuply product is priced in South African Rands (ZAR), with no USD billing or conversion surprises. Products connect to PayFast, Ozow, Yoco, SnapScan and EFT.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need to install an app to use Chuply?</summary>
+        <p>No. Every Chuply product works in the web browser, shares over WhatsApp, and sets up in minutes with no downloads.</p>
+      </details>
     </div>
   </div>
 </section>
